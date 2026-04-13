@@ -1,0 +1,22 @@
+{
+  "name": "openrouter-smart-router",
+  "version": "1.0.0",
+  "description": "Intelligent AI model router for Cloudflare Workers - free-first routing, Thompson Sampling, circuit breakers",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "models": "curl http://localhost:8787/models",
+    "stats": "curl http://localhost:8787/stats",
+    "health": "curl http://localhost:8787/health"
+  },
+  "dependencies": {
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20251111.0",
+    "typescript": "^5.0.0",
+    "wrangler": "^3.0.0"
+  }
+}

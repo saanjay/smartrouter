@@ -1,0 +1,41 @@
+# OpenRouter Smart Router
+# Intelligent AI model routing for Cloudflare Workers
+# Free-first routing, Thompson Sampling, circuit breakers, semantic caching
+
+name = "openrouter-smart-router"
+main = "src/index.ts"
+compatibility_date = "2024-04-03" # Required for RPC service bindings
+
+# Cron trigger for model discovery (every 24 hours at midnight UTC)
+[triggers]
+crons = ["0 0 * * *"]
+
+# KV for model state (active models + cooldowns)
+# Create yours: npx wrangler kv:namespace create MODEL_STATE
+[[kv_namespaces]]
+binding = "MODEL_STATE"
+id = "<YOUR_KV_NAMESPACE_ID>"
+
+# D1 Database for intelligent router (models, benchmarks, usage logs)
+# Create yours: npx wrangler d1 create smart-router-db
+# Then apply migrations: npx wrangler d1 migrations apply smart-router-db --local
+[[d1_databases]]
+binding = "AI_ROUTER_DB"
+database_name = "smart-router-db"
+database_id = "<YOUR_D1_DATABASE_ID>"
+
+# Workers AI for embedding generation
+[ai]
+binding = "AI"
+
+[vars]
+ENVIRONMENT = "development"
+
+# AI Gateway Configuration (all AI calls route through here)
+# Create an AI Gateway in your Cloudflare dashboard, then set:
+# Full path: {AI_GATEWAY_ENDPOINT}/chat/completions
+AI_GATEWAY_ENDPOINT = "<YOUR_AI_GATEWAY_ENDPOINT>"
+
+# Secrets (set via wrangler secret put):
+# - AI_GATEWAY_TOKEN (required - for AI Gateway authentication)
+# - OPENROUTER_API_KEY (optional - for authenticated OpenRouter API access)
