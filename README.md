@@ -1,6 +1,6 @@
 # OpenRouter Smart Router
 
-Intelligent AI model router for **Cloudflare Workers**. Routes requests to the best available model on OpenRouter with free-first prioritization, automatic failover, and learning-based optimization.
+An AI model discovery and routing tool for **Cloudflare Workers**. Discovers the best model for the right purpose, prioritizes the best free models first, and falls back to the highest-ranked lowest-price model. Built on OpenRouter with automatic failover and learning-based optimization.
 
 ## Features
 
