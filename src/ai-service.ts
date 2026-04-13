@@ -814,7 +814,7 @@ export class SmartRouterService extends WorkerEntrypoint<AIServiceEnv> {
 
       const result = await this.env.AI.run(embeddingModel as any, {
         text: inputs,
-      }) as { data: number[][] };
+      }) as unknown as { data: number[][] };
 
       return {
         success: true,
